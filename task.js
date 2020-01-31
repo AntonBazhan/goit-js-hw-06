@@ -60,15 +60,12 @@ console.log(getNamesSortedByFriendsCount(users));
 
 // Задание 10
 
-const getSortedUniqueSkills = users => {
-  const skills = users.reduce((allSkills, user) => {
-    allSkills.push(...user.skills);
-    return allSkills.sort();
-  }, []);
-  const withoutRepetition = skills.filter(function(value, index, self) {
-    return self.indexOf(value) === index;
-  });
-  return withoutRepetition;
-};
+const getSortedUniqueSkills = users => 
+users
+  .map(user=>user.skills)
+  .reduce((allSkills, user) => [...allSkills, ...user], [])
+  .filter((elem, index, array) => array.indexOf(elem) === index)
+  .sort((b, a) => b.localeCompare(a, 'en'));
+ 
 console.log(getSortedUniqueSkills(users));
 // [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
